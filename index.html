@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Railway Runs</title>
+    <style>
+       body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+canvas {
+    display: block;
+    background: linear-gradient(to bottom, #87CEEB, #006400); /* Sky to Grass */
+}
+
+#score {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: white;
+    font-size: 20px;
+    z-index: 10;
+}
+
+#gameOver, #mainMenu, #pauseMenu, #shopMenu {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 40px;
+    text-align: center;
+    display: none;
+}
+
+#gameOver {
+    z-index: 30; /* Ensure it's on top */
+}
+
+#mainMenu {
+    z-index: 20; /* Ensure it's below the game over and shop screens */
+}
+
+#shopMenu {
+    z-index: 25; /* Ensure it's above the main menu but below the game over screen */
+}
+
+#pauseMenu {
+    z-index: 20; /* Same as mainMenu to ensure proper stacking */
+}
+
+#totalPoints {
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.shop-item {
+    margin: 10px 0;
+}
+
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- Score and menus -->
+    <div id="score">Score: 0</div>
+    <div id="gameOver">Game Over!<br>Your Score: <span id="finalScore"></span><br><button onclick="showMainMenu()">Main Menu</button></div>
+    <div id="mainMenu">
+        <h1>Railway Runs by Vedanth</h1>
+        <button onclick="startGame()">Play</button><br>
+        <button id="shopButton">Shop</button>
+        <div id="totalPoints">Total Points: 0</div>
+    </div>
+    <div id="shopMenu"></div>
+    <div id="pauseMenu">
+        <h1>Paused</h1>
+        <button onclick="resumeGame()">Resume</button>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
