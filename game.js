@@ -1,6 +1,36 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
+// Variables to track touch position for swipe detection
+let touchStartX = 0;
+let touchEndX = 0;
+
+// Function to handle touch start
+function handleTouchStart(event) {
+    touchStartX = event.changedTouches[0].screenX; // Get the X position where touch started
+}
+
+// Function to handle touch end
+function handleTouchEnd(event) {
+    touchEndX = event.changedTouches[0].screenX; // Get the X position where touch ended
+
+    // Calculate swipe direction
+    if (touchEndX < touchStartX - 30 && currentLane > 0) {
+        // Swiped left
+        currentLane--;
+        player.x = lanes[currentLane];
+    } else if (touchEndX > touchStartX + 30 && currentLane < lanes.length - 1) {
+        // Swiped right
+        currentLane++;
+        player.x = lanes[currentLane];
+    }
+}
+
+// Add touch event listeners for mobile controls
+canvas.addEventListener('touchstart', handleTouchStart, false);
+canvas.addEventListener('touchend', handleTouchEnd, false);
+
+
 // Set canvas dimensions to full window
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
